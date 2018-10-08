@@ -42,15 +42,14 @@ function aoeMp3s(message) {
       voiceChannel
         .join()
         .then(connection => {
-          // let timeout = setTimeout(() => {
-
-          // }, timeoutDuration)
-          const dispatcher = connection.playFile(aoeMp3sData[cmd])
-          dispatcher.on('end', end => {
-            setTimeout(() => {
-              voiceChannel.leave()
-            }, timeoutDuration)
-          })
+          setTimeout(() => {
+            const dispatcher = connection.playFile(aoeMp3sData[cmd])
+            dispatcher.on('end', end => {
+              setTimeout(() => {
+                voiceChannel.leave()
+              }, timeoutDuration)
+            })
+          }, 2000)
         })
         .catch(err => {
           message.channel.send('AOE bot has resigned')
