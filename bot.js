@@ -5,7 +5,7 @@ const aoeCommands = require('./aoe-commands.json')
 const aoeMp3sData = require('./aoe-mp3s.json')
 
 let ready = true;
-let timeoutDuration = 1000
+let timeoutDuration = 2000
 
 client.on('ready', () => {
   console.log('ready!')
