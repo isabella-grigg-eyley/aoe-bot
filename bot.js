@@ -5,7 +5,6 @@ const aoeCommands = require('./aoe-commands.json')
 const aoeMp3sData = require('./aoe-mp3s.json')
 
 let ready = true;
-let timeoutDuration = 2000
 
 client.on('ready', () => {
   console.log('ready!')
@@ -42,14 +41,10 @@ function aoeMp3s(message) {
       voiceChannel
         .join()
         .then(connection => {
-          setTimeout(() => {
-            const dispatcher = connection.playFile(aoeMp3sData[cmd])
-            dispatcher.on('end', end => {
-              setTimeout(() => {
-                voiceChannel.leave()
-              }, timeoutDuration)
-            })
-          }, 2000)
+          const dispatcher = connection.playFile(aoeMp3sData[cmd])
+          dispatcher.on('end', end => {
+            voiceChannel.leave()
+          })
         })
         .catch(err => {
           message.channel.send('AOE bot has resigned')
@@ -73,9 +68,7 @@ function wololo(message) {
       .then(connection => {
         const dispatcher = connection.playFile(aoeMp3sData[30])
         dispatcher.on('end', end => {
-          setTimeout(() => {
-            voiceChannel.leave()
-          }, timeoutDuration)
+          voiceChannel.leave()
         })
       })
       .catch(err => {
