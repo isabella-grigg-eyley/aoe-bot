@@ -11,15 +11,19 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-  if (message.content.substring(0, 1) === '!') {
-    if (message.content.substring(0, 4) == '!aoe' && ready == true) {
-      ready = false;
-      aoeMp3s(message)
+  try {
+    if (message.content.substring(0, 1) === '!') {
+      if (message.content.substring(0, 4) == '!aoe' && ready == true) {
+        ready = false;
+        aoeMp3s(message)
 
-    } else if (message.content.substring(0, 7) == "!wololo" && ready == true) {
-      ready = false;
-      wololo(message)
+      } else if (message.content.substring(0, 7) == "!wololo" && ready == true) {
+        ready = false;
+        wololo(message)
+      }
     }
+  } catch (err) {
+    console.log(err)
   }
 })
 
