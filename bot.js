@@ -3,11 +3,16 @@ const client = new Client()
 const { token } = require('./auth.json')
 const aoeCommands = require('./aoe-commands.json')
 const aoeMp3sData = require('./aoe-mp3s.json')
+const startupCommands = require('./startups')
 
 let ready = true;
 
 client.on('ready', () => {
   console.log('ready!')
+  let aoebotChannel = client.channels.get('392199619758784523')
+  let rand = Math.floor(Math.random() * 3)
+  console.log(startupCommands[rand])
+  aoebotChannel.send(startupCommands[rand])
 })
 
 client.on('message', message => {
