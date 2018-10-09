@@ -4,6 +4,7 @@ const { token } = require('./auth.json')
 const aoeCommands = require('./aoe-commands.json')
 const aoeMp3sData = require('./aoe-mp3s.json')
 const startupCommands = require('./startups')
+const playstationSounds = require('./playstation.json')
 
 let ready = true;
 
@@ -25,6 +26,12 @@ client.on('message', message => {
       } else if (message.content.substring(0, 7) == "!wololo" && ready == true) {
         ready = false;
         wololo(message)
+      } else if (message.content.substring(0, 3) == "!ps1" && ready == true) {
+        ready = false;
+        playstation(message, '1')
+      } else if (message.content.substring(0, 3) == "!ps2" && ready == true) {
+        ready = false;
+        playstation(message, '2')
       }
     }
   } catch (err) {
@@ -32,6 +39,28 @@ client.on('message', message => {
   }
 })
 
+
+function playstation(message, num) {
+  let voiceChannel = message.member.voiceChannel
+  if (message.member.voiceChannel == null) {
+    message.channel.send('Get in vc ya scrub')
+  } else {
+    voiceChannel
+      .join()
+      .then(connection => {
+        const dispatcher = connection.playFile(playstationSounds[num])
+        dispatcher.on('end', end => {
+          voiceChannel.leave()
+        })
+      })
+      .catch(err => {
+        message.channel.send('AOE bot has resigned')
+        console.log(err)
+        voiceChannel.leave()
+      })
+  }
+  ready = true
+}
 
 function aoeMp3s(message) {
   let args = message.content.split(' ')
