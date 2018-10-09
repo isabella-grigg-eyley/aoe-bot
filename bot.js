@@ -65,7 +65,8 @@ function wololo(message) {
     const attachment = new Attachment('./wololo.png')
     message.channel.send(attachment)
   } else {
-
+    const attachment = new Attachment('./wololo.png')
+    message.channel.send(attachment)
     voiceChannel
       .join()
       .then(connection => {
@@ -80,8 +81,6 @@ function wololo(message) {
         voiceChannel.leave()
       })
 
-    const attachment = new Attachment('./wololo.png')
-    message.channel.send(attachment)
   }
   ready = true
 }
