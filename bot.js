@@ -7,6 +7,8 @@ const startupCommands = require('./startups')
 const playstationSounds = require('./playstation.json')
 const miscSounds = require('./misc.json')
 
+let fmaBool = true;
+
 let ready = true;
 
 client.on('ready', () => {
@@ -50,6 +52,13 @@ client.on('message', message => {
       } else if (message.content.substring(0, 8) == "!pinball" && ready == true) {
         ready = false;
         playMisc(message, 'pinball')
+      } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
+        ready = false;
+        let str;
+        fmaBool ? str = "fma" + 1 : str = "fma" + 2
+        fmaBool = !fmaBool
+        console.log(str)
+        playMisc(message, str)
       } else if (message.content.substring(0, 9) == "!help" && ready == true) {
         let aoebotChannel = client.channels.get('392199619758784523')
         aoebotChannel.send("The commands available are !aoe [number between 1 and 42], !wololo, !ps1, !ps2, !law, !is-only-game, !x-files, !xp-start, !xp-end and !pinball.")
