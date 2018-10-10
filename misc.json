@@ -1,5 +1,8 @@
 {
   "law": "./misc/law.mp3",
   "is-only-game": "./misc/why-you-heff-to-be-mad.mp3",
-  "x-files": "./misc/x-files-theme.mp3"
+  "x-files": "./misc/x-files-theme.mp3",
+  "pinball": "./misc/3d-pinball-start.mp3",
+  "xp-start": "./misc/win-xp-start.mp3",
+  "xp-end": "./misc/win-xp-end.mp3"
 }
