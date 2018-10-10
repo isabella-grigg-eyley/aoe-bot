@@ -13,19 +13,13 @@ client.on('ready', () => {
 client.on('message', message => {
   if (message.content.substring(0, 1) === '!') {
     if (message.content.substring(0, 4) == '!aoe' && ready == true) {
-
       ready = false;
       aoeMp3s(message)
 
-      //aoePhrases(message)
     } else if (message.content.substring(0, 7) == "!wololo" && ready == true) {
       ready = false;
       wololo(message)
     }
-    // else if (message.content.substring(0, 7) == '!insult' && ready == true) {
-    //   ready = false;
-    //   insult(message)
-    // }
   }
 })
 
@@ -36,7 +30,7 @@ function aoeMp3s(message) {
   if (cmd <= 42 && cmd > 0) {
     let voiceChannel = message.member.voiceChannel
     if (message.member.voiceChannel == null) {
-      message.channel.send('Get in vc ya scrub', { tts: true })
+      message.channel.send('Get in vc ya scrub')
     } else {
       voiceChannel
         .join()
@@ -82,17 +76,5 @@ function wololo(message) {
   }
   ready = true
 }
-
-// function insult(message) {
-//   // let args = message.content.split(' ')
-//   // // console.log(JSON.stringify(message.mentions))
-//   // message.members.forEach(member => {
-//   //   console.log(member.nickname)
-//   // });
-
-//   if (guild.available)
-
-//   ready = true;
-// }
 
 client.login(token);
