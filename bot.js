@@ -59,6 +59,9 @@ client.on('message', message => {
       } else if (message.content.substring(0, 5) == "!adum" && ready == true) {
         ready = false;
         playMisc(message, 'adum')
+      } else if (message.content.substring(0, 10) == "!deathnote" && ready == true) {
+        ready = false;
+        playMisc(message, 'deathnote')
       } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
         ready = false;
         let str;
