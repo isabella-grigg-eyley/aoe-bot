@@ -1,7 +1,11 @@
-const { Client, Attachment } = require('discord.js')
+const {
+  Client,
+  Attachment
+} = require('discord.js')
 const client = new Client()
-const { token } = require('./auth.json')
-const aoeCommands = require('./aoe-commands.json')
+const {
+  token
+} = require('./auth.json')
 const aoeMp3sData = require('./aoe-mp3s.json')
 const startupCommands = require('./startups')
 const playstationSounds = require('./playstation.json')
@@ -52,6 +56,9 @@ client.on('message', message => {
       } else if (message.content.substring(0, 8) == "!pinball" && ready == true) {
         ready = false;
         playMisc(message, 'pinball')
+      } else if (message.content.substring(0, 5) == "!adum" && ready == true) {
+        ready = false;
+        playMisc(message, 'adum')
       } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
         ready = false;
         let str;

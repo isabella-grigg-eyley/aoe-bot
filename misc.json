@@ -6,5 +6,6 @@
   "xp-start": "./misc/win-xp-start.mp3",
   "xp-end": "./misc/win-xp-end.mp3",
   "fma1": "./misc/fma1.mp3",
-  "fma2": "./misc/fma2.mp3"
+  "fma2": "./misc/fma2.mp3",
+  "adum": "./misc/adum.mp3"
 }
