@@ -1,11 +1,7 @@
-const {
-  Client,
-  Attachment
-} = require('discord.js')
+const { Client, Attachment } = require('discord.js')
 const client = new Client()
-const {
-  token
-} = require('./auth.json')
+require('dotenv').config()
+const token = process.env.TOKEN
 const aoeMp3sData = require('./aoe-mp3s.json')
 const startupCommands = require('./startups')
 const playstationSounds = require('./playstation.json')
