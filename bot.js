@@ -28,7 +28,7 @@ const {
 
 client.on('ready', () => {
   console.log('ready!')
-  sendStartupMessage(client)
+  //sendStartupMessage(client)
 })
 
 client.on('message', message => {
@@ -71,11 +71,13 @@ client.on('message', message => {
           break;
         default:
           console.log(`invalid command detected: ${cmd}`)
+          setReadyTrue()
           break;
       }
     }
   } catch (err) {
     console.log(`ERROR: ${err}`)
+    setReadyTrue()
   }
 })
 

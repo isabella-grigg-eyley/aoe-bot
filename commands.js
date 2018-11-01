@@ -78,7 +78,7 @@ function playFma(message, cb) {
 }
 
 function sendHelp(message, cb) {
-  message.channel.send('Hello! The commands available are: * !aoe [number between 1 and 42] * !wololo * !ps1 * !ps2 * !law * !is-only-game * !x-files * !xp-start * !xp-end * !pinball.')
+  message.channel.send('**Hello!**\nThe commands available are:\n\n!aoe *[number between 1 and 42]*\n!wololo\n!fma\n!ps1\n!ps2\n!law\n!is-only-game\n!x-files\n!xp-start\n!xp-end\n!pinball\n!adum\n!deathnote\n!halloween\n!help')
   cb()
 }
 

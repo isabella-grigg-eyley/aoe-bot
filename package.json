@@ -1,7 +1,7 @@
 {
-  "name": "baby-bot",
+  "name": "aoe-bot",
   "version": "1.0.0",
-  "description": "Hit em with that AOE shit",
+  "description": "Quality content bot",
   "main": "bot.js",
   "author": "bellanza",
   "dependencies": {
