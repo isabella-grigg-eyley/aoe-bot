@@ -28,7 +28,7 @@ const {
 
 client.on('ready', () => {
   console.log('ready!')
-  //sendStartupMessage(client)
+  sendStartupMessage(client)
 })
 
 client.on('message', message => {
