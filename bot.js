@@ -28,7 +28,7 @@ const {
 
 client.on('ready', () => {
   console.log('ready!')
-  //sendStartupMessage(client)
+  sendStartupMessage(client)
 })
 
 client.on('message', message => {
@@ -65,6 +65,7 @@ client.on('message', message => {
         case 'pinball':
         case 'adum':
         case 'deathnote':
+        case 'halloween':
           ready = false
           playMisc(message, setReadyTrue)
           break;

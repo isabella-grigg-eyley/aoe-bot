@@ -8,5 +8,6 @@
   "fma1": "./sfx/misc/fma1.mp3",
   "fma2": "./sfx/misc/fma2.mp3",
   "adum": "./sfx/misc/adum.mp3",
-  "deathnote": "./sfx/misc/potato-chip.mp3"
+  "deathnote": "./sfx/misc/potato-chip.mp3",
+  "halloween": "./sfx/misc/the-shape.ogg"
 }
