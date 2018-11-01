@@ -1,11 +1,14 @@
-const { Client, Attachment } = require('discord.js')
+const {
+  Client,
+  Attachment
+} = require('discord.js')
 const client = new Client()
 require('dotenv').config()
 const token = process.env.TOKEN
-const aoeMp3sData = require('./aoe-mp3s.json')
-const startupCommands = require('./startups')
-const playstationSounds = require('./playstation.json')
-const miscSounds = require('./misc.json')
+const aoeMp3sData = require('./sfx/aoe-mp3s.json')
+const startupCommands = require('./misc-fx/startups')
+const playstationSounds = require('./sfx/playstation.json')
+const miscSounds = require('./sfx/misc.json')
 
 let fmaBool = true;
 
@@ -13,10 +16,10 @@ let ready = true;
 
 client.on('ready', () => {
   console.log('ready!')
-  let aoebotChannel = client.channels.get('392199619758784523')
-  let rand = Math.floor(Math.random() * 3)
-  console.log(startupCommands[rand])
-  aoebotChannel.send(startupCommands[rand])
+  // let aoebotChannel = client.channels.get('392199619758784523')
+  // let rand = Math.floor(Math.random() * 3)
+  // console.log(startupCommands[rand])
+  // aoebotChannel.send(startupCommands[rand])
 })
 
 client.on('message', message => {
@@ -148,10 +151,10 @@ function aoeMp3s(message) {
 function wololo(message) {
   let voiceChannel = message.member.voiceChannel
   if (message.member.voiceChannel == null) {
-    const attachment = new Attachment('./wololo.png')
+    const attachment = new Attachment('./misc-fx/wololo.png')
     message.channel.send(attachment)
   } else {
-    const attachment = new Attachment('./wololo.png')
+    const attachment = new Attachment('./misc-fx/wololo.png')
     message.channel.send(attachment)
     voiceChannel
       .join()
