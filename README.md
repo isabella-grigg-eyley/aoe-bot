@@ -27,6 +27,7 @@ Next you'll need to setup authentication credentials. You will need a Discord ac
 TOKEN=[your token pasted here]
 ```
 and save that.
+
 6. Your bot should be ready to go! In the command line in the bot folder, run
 ```
 node bot.js
