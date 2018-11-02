@@ -1,0 +1,13 @@
+{
+  "law": "./sfx/misc/law.mp3",
+  "is-only-game": "./sfx/misc/why-you-heff-to-be-mad.mp3",
+  "x-files": "./sfx/misc/x-files-theme.mp3",
+  "pinball": "./sfx/misc/3d-pinball-start.mp3",
+  "xp-start": "./sfx/misc/win-xp-start.mp3",
+  "xp-end": "./sfx/misc/win-xp-end.mp3",
+  "fma1": "./sfx/misc/fma1.mp3",
+  "fma2": "./sfx/misc/fma2.mp3",
+  "adum": "./sfx/misc/adum.mp3",
+  "deathnote": "./sfx/misc/potato-chip.mp3",
+  "halloween": "./sfx/misc/the-shape.ogg"
+}

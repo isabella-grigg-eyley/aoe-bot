@@ -1,174 +1,108 @@
-const { Client, Attachment } = require('discord.js')
+// discord config and modules
+const {
+  Client
+} = require('discord.js')
 const client = new Client()
+
+// auth
+
 require('dotenv').config()
 const token = process.env.TOKEN
-const aoeMp3sData = require('./aoe-mp3s.json')
-const startupCommands = require('./startups')
-const playstationSounds = require('./playstation.json')
-const miscSounds = require('./misc.json')
 
-let fmaBool = true;
+// local vars
 
-let ready = true;
+let ready = true
+
+// functions
+
+const {
+  sendStartupMessage,
+  aoeMp3s,
+  wololo,
+  playstation,
+  playMisc,
+  playFma,
+  sendHelp
+} = require('./commands')
+
 
 client.on('ready', () => {
   console.log('ready!')
-  let aoebotChannel = client.channels.get('392199619758784523')
-  let rand = Math.floor(Math.random() * 3)
-  console.log(startupCommands[rand])
-  aoebotChannel.send(startupCommands[rand])
+  //sendStartupMessage(client)
 })
 
 client.on('message', message => {
   try {
-    if (message.content.substring(0, 1) === '!') {
-      if (message.content.substring(0, 4) == '!aoe' && ready == true) {
-        ready = false;
-        aoeMp3s(message)
-      } else if (message.content.substring(0, 7) == "!wololo" && ready == true) {
-        ready = false;
-        wololo(message)
-      } else if (message.content.substring(0, 4) == "!ps1" && ready == true) {
-        ready = false;
-        playstation(message, '1')
-      } else if (message.content.substring(0, 4) == "!ps2" && ready == true) {
-        ready = false;
-        playstation(message, '2')
-      } else if (message.content.substring(0, 4) == "!law" && ready == true) {
-        ready = false;
-        playMisc(message, 'law')
-      } else if (message.content.substring(0, 13) == "!is-only-game" && ready == true) {
-        ready = false;
-        playMisc(message, 'is-only-game')
-      } else if (message.content.substring(0, 8) == "!x-files" && ready == true) {
-        ready = false;
-        playMisc(message, 'x-files')
-      } else if (message.content.substring(0, 9) == "!xp-start" && ready == true) {
-        ready = false;
-        playMisc(message, 'xp-start')
-      } else if (message.content.substring(0, 7) == "!xp-end" && ready == true) {
-        ready = false;
-        playMisc(message, 'xp-end')
-      } else if (message.content.substring(0, 8) == "!pinball" && ready == true) {
-        ready = false;
-        playMisc(message, 'pinball')
-      } else if (message.content.substring(0, 5) == "!adum" && ready == true) {
-        ready = false;
-        playMisc(message, 'adum')
-      } else if (message.content.substring(0, 10) == "!deathnote" && ready == true) {
-        ready = false;
-        playMisc(message, 'deathnote')
-      } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
-        ready = false;
-        let str;
-        fmaBool ? str = "fma" + 1 : str = "fma" + 2
-        fmaBool = !fmaBool
-        console.log(str)
-        playMisc(message, str)
-      } else if (message.content.substring(0, 9) == "!help" && ready == true) {
-        let aoebotChannel = client.channels.get('392199619758784523')
-        aoebotChannel.send("The commands available are !aoe [number between 1 and 42], !wololo, !ps1, !ps2, !law, !is-only-game, !x-files, !xp-start, !xp-end and !pinball.")
+    if (message.content.substring(0, 1) === '!' && ready) {
+      let cmd = grabInitCommand(message.content)
+      switch (cmd) {
+        case 'help':
+          ready = false
+          sendHelp(message, setReadyTrue)
+          break;
+        case 'aoe':
+          ready = false
+          aoeMp3s(message, setReadyTrue)
+          break;
+        case 'wololo':
+          ready = false
+          wololo(message, setReadyTrue)
+          break;
+        case 'fma':
+          ready = false
+          playFma(message, setReadyTrue)
+          break;
+        case 'ps1':
+        case 'ps2':
+          ready = false
+          playstation(message, setReadyTrue)
+          break;
+        case 'law':
+        case 'is-only-game':
+        case 'x-files':
+        case 'xp-start':
+        case 'xp-end':
+        case 'pinball':
+        case 'adum':
+        case 'deathnote':
+        case 'halloween':
+          ready = false
+          playMisc(message, setReadyTrue)
+          break;
+        default:
+          console.log(`invalid command detected: ${cmd}`)
+          setReadyTrue()
+          break;
       }
     }
   } catch (err) {
-    console.log(err)
+    console.log(`ERROR: ${err}`)
+    setReadyTrue()
   }
 })
 
-function playMisc(message, filename) {
-  let voiceChannel = message.member.voiceChannel
-  if (message.member.voiceChannel == null) {
-    message.channel.send('Get in vc ya scrub')
-  } else {
-    voiceChannel
-      .join()
-      .then(connection => {
-        const dispatcher = connection.playFile(miscSounds[filename])
-        dispatcher.on('end', end => {
-          voiceChannel.leave()
-        })
-      })
-      .catch(err => {
-        message.channel.send('AOE bot has resigned')
-        console.log(err)
-        voiceChannel.leave()
-      })
-  }
+// } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
+//   ready = false;
+//   let str;
+//   fmaBool ? str = "fma" + 1 : str = "fma" + 2
+//   fmaBool = !fmaBool
+//   console.log(str)
+//   playMisc(message, str)
+// } else if (message.content.substring(0, 9) == "!help" && ready == true) {
+//   let aoebotChannel = client.channels.get('392199619758784523')
+//   aoebotChannel.send("The commands available are !aoe [number between 1 and 42], !wololo, !ps1, !ps2, !law, !is-only-game, !x-files, !xp-start, !xp-end and !pinball.")
+// }
+
+function setReadyTrue() {
   ready = true
 }
 
-function playstation(message, num) {
-  let voiceChannel = message.member.voiceChannel
-  if (message.member.voiceChannel == null) {
-    message.channel.send('Get in vc ya scrub')
-  } else {
-    voiceChannel
-      .join()
-      .then(connection => {
-        const dispatcher = connection.playFile(playstationSounds[num])
-        dispatcher.on('end', end => {
-          voiceChannel.leave()
-        })
-      })
-      .catch(err => {
-        message.channel.send('AOE bot has resigned')
-        console.log(err)
-        voiceChannel.leave()
-      })
-  }
-  ready = true
-}
-
-function aoeMp3s(message) {
-  let args = message.content.split(' ')
-  let cmd = Number(args[1])
-  if (cmd <= 42 && cmd > 0) {
-    let voiceChannel = message.member.voiceChannel
-    if (message.member.voiceChannel == null) {
-      message.channel.send('Get in vc ya scrub')
-    } else {
-      voiceChannel
-        .join()
-        .then(connection => {
-          const dispatcher = connection.playFile(aoeMp3sData[cmd])
-          dispatcher.on('end', end => {
-            voiceChannel.leave()
-          })
-        })
-        .catch(err => {
-          message.channel.send('AOE bot has resigned')
-          console.log(err)
-          voiceChannel.leave()
-        })
-    }
-  }
-  ready = true
-}
-
-function wololo(message) {
-  let voiceChannel = message.member.voiceChannel
-  if (message.member.voiceChannel == null) {
-    const attachment = new Attachment('./wololo.png')
-    message.channel.send(attachment)
-  } else {
-    const attachment = new Attachment('./wololo.png')
-    message.channel.send(attachment)
-    voiceChannel
-      .join()
-      .then(connection => {
-        const dispatcher = connection.playFile(aoeMp3sData[30])
-        dispatcher.on('end', end => {
-          voiceChannel.leave()
-        })
-      })
-      .catch(err => {
-        message.channel.send('AOE bot has resigned')
-        console.log(err)
-        voiceChannel.leave()
-      })
-
-  }
-  ready = true
+function grabInitCommand(cmd) {
+  let spaceIdx = cmd.indexOf(' ')
+  if (spaceIdx > -1) {
+    cmd = cmd.substring(1, spaceIdx)
+  } else cmd = cmd.substring(1)
+  return cmd
 }
 
 client.login(token);
