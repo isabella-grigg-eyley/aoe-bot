@@ -28,11 +28,12 @@ const {
 
 client.on('ready', () => {
   console.log('ready!')
-  sendStartupMessage(client)
+  //sendStartupMessage(client)
 })
 
 client.on('message', message => {
   try {
+    if (!ready) console.log("Message received but still waiting to finish previous command")
     if (message.content.substring(0, 1) === '!' && ready) {
       let cmd = grabInitCommand(message.content)
       switch (cmd) {
@@ -80,18 +81,6 @@ client.on('message', message => {
     setReadyTrue()
   }
 })
-
-// } else if (message.content.substring(0, 8) == "!fma" && ready == true) {
-//   ready = false;
-//   let str;
-//   fmaBool ? str = "fma" + 1 : str = "fma" + 2
-//   fmaBool = !fmaBool
-//   console.log(str)
-//   playMisc(message, str)
-// } else if (message.content.substring(0, 9) == "!help" && ready == true) {
-//   let aoebotChannel = client.channels.get('392199619758784523')
-//   aoebotChannel.send("The commands available are !aoe [number between 1 and 42], !wololo, !ps1, !ps2, !law, !is-only-game, !x-files, !xp-start, !xp-end and !pinball.")
-// }
 
 function setReadyTrue() {
   ready = true
