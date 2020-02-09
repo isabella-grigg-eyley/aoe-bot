@@ -1,5 +1,6 @@
 // discord config and modules
-const {
+const
+{
   Client
 } = require('discord.js')
 const client = new Client()
@@ -15,7 +16,8 @@ let ready = true
 
 // functions
 
-const {
+const
+{
   sendStartupMessage,
   aoeMp3s,
   wololo,
@@ -26,17 +28,24 @@ const {
 } = require('./commands')
 
 
-client.on('ready', () => {
+client.on('ready', () => 
+{
   console.log('ready!')
   //sendStartupMessage(client)
 })
 
-client.on('message', message => {
-  try {
+client.on('message', message => 
+{
+  try
+  {
     if (!ready) console.log("Message received but still waiting to finish previous command")
-    if (message.content.substring(0, 1) === '!' && ready) {
+    
+    if (message.content.substring(0, 1) === '!' && ready)
+    {
       let cmd = grabInitCommand(message.content)
-      switch (cmd) {
+      
+      switch (cmd)
+      {
         case 'help':
           ready = false
           sendHelp(message, setReadyTrue)
@@ -76,21 +85,26 @@ client.on('message', message => {
           break;
       }
     }
-  } catch (err) {
+  }
+  catch (err)
+  {
     console.log(`ERROR: ${err}`)
     setReadyTrue()
   }
 })
 
-function setReadyTrue() {
+function setReadyTrue()
+{
   ready = true
 }
 
-function grabInitCommand(cmd) {
+function grabInitCommand(cmd)
+{
   let spaceIdx = cmd.indexOf(' ')
-  if (spaceIdx > -1) {
+  if (spaceIdx > -1)
     cmd = cmd.substring(1, spaceIdx)
-  } else cmd = cmd.substring(1)
+  else
+    cmd = cmd.substring(1)
   return cmd
 }
 
