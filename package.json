@@ -5,16 +5,19 @@
   "main": "bot.js",
   "author": "bellanza",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "dotenv": "^6.1.0",
+    "@discordjs/uws": "^10.149.0",
+    "bufferutil": "^4.0.1",
+    "discord.js": "^11.5.1",
+    "dotenv": "^6.2.0",
+    "erlpack": "github:discordapp/erlpack",
     "event-stream": "3.3.4",
     "ffmpeg": "0.0.4",
     "node-gyp": "^3.8.0",
-    "node-opus": "^0.3.1",
-    "nodemon": "^1.18.4"
+    "node-opus": "^0.3.3",
+    "nodemon": "^1.19.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4"
   }
 }
