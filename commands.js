@@ -28,30 +28,37 @@ function PlayFile(message, filename, cb)
 	let voiceChannel = message.member.voiceChannel;
 	
 	if (message.member.voiceChannel == null)
-		message.channel.send('Get in vc ya scrub');
-	
-	else
 	{
-		voiceChannel
-			.join()
-			.then(connection =>
+		message.channel.send('Get in vc ya scrub');
+		return;
+	}
+	
+	// If we can't speak in the channel, bail
+	if (!message.member.voiceChannel.speakable)
+	{
+		console.log('Error: The voice channel the user is in is not Speakable for me.');
+		return;
+	}
+	
+	// Everything's fine, so connect to the voice channel and send file
+	voiceChannel
+		.join()
+		.then(connection =>
+		{
+			const dispatcher = connection.playFile(filename);
+			dispatcher.on('end', end =>
 			{
-				const dispatcher = connection.playFile(filename);
-				dispatcher.on('end', end =>
-				{
-					voiceChannel.leave();
-					cb();
-				});
-			})
-			.catch(err =>
-			{
-				message.channel.send('AOE bot has resigned');
-				console.log(err);
 				voiceChannel.leave();
 				cb();
 			});
-	}
-	
+		})
+		.catch(err =>
+		{
+			message.channel.send('AOE bot has resigned');
+			console.log(err);
+			voiceChannel.leave();
+			cb();
+		});
 }
 
 function PlayMisc(message, cb)
